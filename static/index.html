@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pub-Quiz Forge · Local-first Quiz-Night Workbench</title>
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <h1>Pub-Quiz Forge</h1>
+    <span class="tagline">Local-first · Flask · SQLite · vanilla JS</span>
+  </div>
+  <div class="actions">
+    <button id="btn-sample" class="ghost">Load sample</button>
+    <button id="btn-clear" class="ghost">Reset</button>
+  </div>
+</header>
+
+<main class="grid">
+  <!-- LEFT: input -->
+  <section class="panel input-panel">
+    <h2>1 · Tell us about your night</h2>
+    <form id="brief-form">
+      <label>
+        <span class="lbl">Brief <small>(group vibe + off-limits + memorable context)</small></span>
+        <textarea id="brief" rows="6" placeholder="e.g. Saturday night, 8 friends for our annual game night, mixed ages, last year everyone loved music rounds..."></textarea>
+      </label>
+
+      <div class="row">
+        <label class="col">
+          <span class="lbl">Theme</span>
+          <select id="theme">
+            <option value="general">General Knowledge</option>
+            <option value="geography">World Geography</option>
+            <option value="music">Music Trivia</option>
+            <option value="movie-tv">Film & Television</option>
+            <option value="sports">Sports</option>
+            <option value="history">History</option>
+            <option value="science">Science & Nature</option>
+            <option value="food-drink">Food & Drink</option>
+            <option value="literature">Books & Literature</option>
+            <option value="1980s">The 1980s</option>
+            <option value="1990s">The 1990s</option>
+            <option value="office">Workplace / Office Humor</option>
+            <option value="holiday">Holidays & Celebrations</option>
+            <option value="tech">Tech & Internet</option>
+            <option value="kids-birthday">Kids' Birthday (8-12 yr)</option>
+          </select>
+        </label>
+        <label class="col">
+          <span class="lbl">Vibe</span>
+          <select id="vibe">
+            <option value="mixed">Mixed adults</option>
+            <option value="adult">Adults only</option>
+            <option value="family">Family</option>
+            <option value="kids">Kids (8-12)</option>
+            <option value="work">Work / team-building</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="row">
+        <label class="col">
+          <span class="lbl">Rounds</span>
+          <input id="n_rounds" type="number" min="3" max="12" value="8">
+        </label>
+        <label class="col">
+          <span class="lbl">Qs / round</span>
+          <input id="qpr" type="number" min="4" max="10" value="8">
+        </label>
+        <label class="col">
+          <span class="lbl">Duration (min)</span>
+          <input id="duration_min" type="number" min="20" max="240" value="90">
+        </label>
+        <label class="col">
+          <span class="lbl"># of teams</span>
+          <input id="n_teams" type="number" min="2" max="20" value="6">
+        </label>
+      </div>
+
+      <button id="btn-forge" type="submit" class="primary">Forge quiz night →</button>
+    </form>
+
+    <div id="history-block" class="history-block">
+      <h3>Previous nights</h3>
+      <div id="history-rows" class="history-rows">
+        <p class="muted small">No previous nights yet.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RIGHT: output -->
+  <section class="panel output-panel">
+    <div id="empty-state" class="empty">
+      <h2>Your quiz night will appear here.</h2>
+      <p class="muted">Fill in the brief on the left and click <strong>Forge quiz night</strong>. The output is the host script — questions, scoring notes, and risk flags — for one easy-to-print night.</p>
+      <ul class="muted small">
+        <li><strong>15 themes</strong> from General Knowledge to Kids' Birthday.</li>
+        <li><strong>5-axis scoring</strong> on balance, pace, ambiguity, accessibility, replayability.</li>
+        <li><strong>Host script</strong> with per-round estimated minutes + scoring rules.</li>
+        <li><strong>Risk flags</strong> like runaway leader or vibe mismatch.</li>
+        <li><strong>Markdown export</strong> for printing answer sheets.</li>
+      </ul>
+    </div>
+
+    <div id="result" class="result hidden"></div>
+  </section>
+</main>
+
+<footer class="footer">
+  Local-first · zero API keys · session log stored in <code>quiz.db</code> · answer keys hidden by default so the host can study before the night · M3
+</footer>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
